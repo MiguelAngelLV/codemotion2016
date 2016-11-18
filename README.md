@@ -1,7 +1,7 @@
 # Codemotion Spain 2016
 
 Ejemplos usados en el workshop **[«Experimentando con chismes y cacharros»][1]**.  
-[Codemotion Spain 2016][2]. Madrid, 19 de Noviembre de 2015.
+[Codemotion Spain 2016][2]. Madrid, 19 de Noviembre de 2016.
 
 **«Experimentando con chismes y cacharros»** es un workshop de: 
 - [Miguel Ángel López  - @MiguelAngel_LV][3]
