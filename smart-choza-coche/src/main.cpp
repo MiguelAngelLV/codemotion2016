@@ -20,8 +20,6 @@
 #define TRIGGER D1
 #define ECHO    D2
 
-//GPIO sensor DHT
-#define DHT_GPIO D3
 
 
 #define RED D6
@@ -42,16 +40,10 @@ Adafruit_MQTT_Client mqtt(&client, AIO_SERVER, AIO_SERVERPORT, AIO_USERNAME, AIO
 
 //Feeds para publicar información
 Adafruit_MQTT_Publish parkedFeed = Adafruit_MQTT_Publish(&mqtt, AIO_FEED "parked");
-Adafruit_MQTT_Publish distanceFeed = Adafruit_MQTT_Publish(&mqtt, AIO_FEED "distance");
-Adafruit_MQTT_Publish humiditySubFeed = Adafruit_MQTT_Publish(&mqtt, AIO_FEED "humidity");
-Adafruit_MQTT_Publish temperatureSubFeed = Adafruit_MQTT_Publish(&mqtt, AIO_FEED "temperature");
 
 //Feed para leer información
 Adafruit_MQTT_Subscribe enabledFeed = Adafruit_MQTT_Subscribe(&mqtt, AIO_FEED "enabled");
 
-
-//Sensor de Humedad
-DHT dht(DHT_GPIO, DHT11);
 
 bool enabled;
 bool parked;
@@ -93,17 +85,23 @@ void setup() {
 
   mqtt.subscribe(&enabledFeed);
 
+  pinMode(BUILTIN_LED, OUTPUT);
+  digitalWrite(BUILTIN_LED, enabled);
+
 }
 
 void loop() {
 
   Adafruit_MQTT_Subscribe * subscription = mqtt.readSubscription(200);
 
-  if (subscription == &enabledFeed)
+  if (subscription == &enabledFeed) {
     if (strcmp((char *)enabledFeed.lastread, "ON") == 0)
         enabled = true;
     else
         enabled = false;
+
+    digitalWrite(LED_BUILTIN, enabled);
+  }
 
 
   if (!enabled)
