@@ -1,9 +1,9 @@
 #include <Arduino.h>
 
 //GPIO leds
-#define RED D1
-#define YELLOW D2
-#define GREEN D3
+#define RED D6
+#define YELLOW D6
+#define GREEN D8
 
 //----------------------------------------------
 
