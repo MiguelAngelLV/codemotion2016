@@ -1,15 +1,17 @@
 #include <Arduino.h>
 
+//GPIO sensor de distancia
 #define TRIGGER D1
 #define ECHO    D2
 
-int time2cm(int time) {
-  return (int) round(time * 0.0171232877);
-}
+int time2cm(int time);
+
+//----------------------------------------------
 
 void setup() {
-
+  //Iniciamos el Serial
   Serial.begin(9600);
+
   //El trigger lanzará el pulso,
   //lo configuramos como salida
   pinMode(TRIGGER, OUTPUT);
@@ -18,9 +20,9 @@ void setup() {
   //El echo recibirá el pulso
   //lo configuramos como entrada
   pinMode(ECHO, INPUT);
-
-
 }
+
+//----------------------------------------------
 
 void loop() {
   //Esperamos 4 microsegundos para asegurarnos de que no hay
@@ -33,13 +35,21 @@ void loop() {
   delayMicroseconds(10);
   digitalWrite(TRIGGER, LOW);
 
+  //Calculamos la distancia
   int duration = pulseIn(ECHO, HIGH);
   int distance = time2cm(duration);
 
-  if (distance > 60)
+  if (distance > 60) {
     Serial.println("Fuera de rango");
-  else
+  } else {
     Serial.printf("Duración: %d. Distancia: %d\n", duration, distance);
+  }
 
-  delay(500);
+  delay(100);
+}
+
+//----------------------------------------------
+
+int time2cm(int time) {
+  return (int) round(time * 0.0171232877);
 }
