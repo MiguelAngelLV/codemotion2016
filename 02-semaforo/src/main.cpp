@@ -2,7 +2,7 @@
 
 //GPIO leds
 #define RED D6
-#define YELLOW D6
+#define YELLOW D7
 #define GREEN D8
 
 //----------------------------------------------
