@@ -36,7 +36,7 @@ void loop() {
   int duration = pulseIn(ECHO, HIGH);
   int distance = time2cm(duration);
 
-  if (distance > 100)
+  if (distance > 60)
     Serial.println("Fuera de rango");
   else
     Serial.printf("Duración: %d. Distancia: %d\n", duration, distance);

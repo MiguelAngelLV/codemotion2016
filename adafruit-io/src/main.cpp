@@ -36,14 +36,14 @@ Adafruit_MQTT_Publish temperatureFeed = Adafruit_MQTT_Publish(&mqtt, AIO_FEED "t
 DHT dht(DHT_GPIO, DHT11);
 
 
-void connect();
+void connectWiFi();
 void connectAdafruit();
 
 void setup() {
 
   Serial.begin(9600);
   delay(200);
-  connect();
+  connectWiFi();
   connectAdafruit();
 
   dht.begin();
@@ -52,11 +52,13 @@ void setup() {
 
 void loop() {
 
+  //Esperamos 1 minuto entre actualización
   delay(60*1000);
 
   float humidity = dht.readHumidity();
   float temperature = dht.readTemperature();
 
+  //El HDT a veces no lee bien y da errores
   if (isnan(humidity) || isnan(temperature))
     Serial.println("Error de lectura");
   else {
@@ -73,7 +75,7 @@ void loop() {
 }
 
 
-void connect() {
+void connectWiFi() {
   WiFi.begin(WLAN_SSID, WLAN_PASS);
   while (WiFi.status() != WL_CONNECTED) {
      delay(500);

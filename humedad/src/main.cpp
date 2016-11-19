@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include "DHT.h"
-#define DHT_GPIO D1
+#define DHT_GPIO D3
 
 DHT dht(DHT_GPIO, DHT11);
 
