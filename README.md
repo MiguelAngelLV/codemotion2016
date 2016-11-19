@@ -37,17 +37,33 @@ Si tu respuesta a las preguntas anteriores es afirmativa no deberías perderte e
 
 [Más información][5].
 
-## Ejercicios
+## Ejercicio 02 - semáforo
 
-### Ejercicio 02 - semáforo
+### Pinout Led
+
+![](_resources/led_anodo_catodo.png)
+
+### Schematic
 
 ![](fritzing/02-semaforo.png)
 
-### Ejercicio 03 - distancia
+## Ejercicio 03 - distancia
+
+### Pinout hc-sr04
+
+![](_resources/hs-sr04-pinout.jpg)
+
+### Schematic
 
 ![](fritzing/03-distancia.png)
 
-### Ejercicio 04 - humedad
+## Ejercicio 04 - humedad
+
+### Pinout dht11
+
+![](_resources/dht11-pinout.png)
+
+### Schematic
 
 ![](fritzing/04-humedad.png)
 
