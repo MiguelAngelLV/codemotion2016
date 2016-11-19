@@ -16,22 +16,9 @@
 #define AIO_FEED        AIO_USERNAME "/feeds/"
 
 
-//GPIO sensor de distancia
-#define TRIGGER D1
-#define ECHO    D2
-
 //GPIO sensor DHT
 #define DHT_GPIO D3
 
-
-#define RED D6
-#define YELLOW D7
-#define GREEN  D8
-
-
-#define FAR    60
-#define MEDIUM 30
-#define NEAR   15
 
 //Conexión wifi
 WiFiClient client;
@@ -41,110 +28,45 @@ Adafruit_MQTT_Client mqtt(&client, AIO_SERVER, AIO_SERVERPORT, AIO_USERNAME, AIO
 
 
 //Feeds para publicar información
-Adafruit_MQTT_Publish parkedFeed = Adafruit_MQTT_Publish(&mqtt, AIO_FEED "parked");
-Adafruit_MQTT_Publish distanceFeed = Adafruit_MQTT_Publish(&mqtt, AIO_FEED "distance");
-Adafruit_MQTT_Publish humiditySubFeed = Adafruit_MQTT_Publish(&mqtt, AIO_FEED "humidity");
-Adafruit_MQTT_Publish temperatureSubFeed = Adafruit_MQTT_Publish(&mqtt, AIO_FEED "temperature");
-
-//Feed para leer información
-Adafruit_MQTT_Subscribe enabledFeed = Adafruit_MQTT_Subscribe(&mqtt, AIO_FEED "enabled");
+Adafruit_MQTT_Publish humidityFeed = Adafruit_MQTT_Publish(&mqtt, AIO_FEED "humidity");
+Adafruit_MQTT_Publish temperatureFeed = Adafruit_MQTT_Publish(&mqtt, AIO_FEED "temperature");
 
 
 //Sensor de Humedad
 DHT dht(DHT_GPIO, DHT11);
 
-bool enabled;
-bool parked;
-
 
 void connect();
-int time2cm(int time);
 void connectAdafruit();
 
 void setup() {
-
-  //El trigger lanzará el pulso,
-  //lo configuramos como salida
-  pinMode(TRIGGER, OUTPUT);
-  digitalWrite(TRIGGER, LOW);
-
-  //El echo recibirá el pulso
-  //lo configuramos como entrada
-  pinMode(ECHO, INPUT);
-
-
-
-  pinMode(RED, OUTPUT);
-  pinMode(YELLOW, OUTPUT);
-  pinMode(GREEN, OUTPUT);
-
-  digitalWrite(RED, LOW);
-  digitalWrite(YELLOW, LOW);
-  digitalWrite(GREEN, LOW);
-
-  enabled = true;
-  parked  = false;
-
 
   Serial.begin(9600);
   delay(200);
   connect();
   connectAdafruit();
 
-  mqtt.subscribe(&enabledFeed);
+  dht.begin();
 
 }
 
 void loop() {
 
-  Adafruit_MQTT_Subscribe * subscription = mqtt.readSubscription(200);
+  delay(60*1000);
 
-  if (subscription == &enabledFeed)
-    if (strcmp((char *)enabledFeed.lastread, "ON") == 0)
-        enabled = true;
-    else
-        enabled = false;
+  float humidity = dht.readHumidity();
+  float temperature = dht.readTemperature();
 
+  if (isnan(humidity) || isnan(temperature))
+    Serial.println("Error de lectura");
+  else {
+    Serial.print("Humedad: ");
+    Serial.println(humidity, 2);
+    Serial.print("Temperatura: ");
+    Serial.println(temperature, 2);
 
-  if (!enabled)
-    return;
-
-
-  //Esperamos 4 microsegundos para asegurarnos de que no hay
-  //ondas residuales que hagan interferencias
-  digitalWrite(TRIGGER, LOW);
-  delayMicroseconds(4);
-
-  //Mandamos un pulso de 10us
-  digitalWrite(TRIGGER, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(TRIGGER, LOW);
-
-  int duration = pulseIn(ECHO, HIGH);
-  int distance = time2cm(duration);
-
-  //Si se produce una distancia tan baja, es por algún error
-  if (duration == 0)
-    distance = FAR;
-
-  if (distance < FAR) {
-    Serial.printf("Duración: %d. Distancia: %d\n", duration, distance);
-  }
-  else
-    Serial.println("Fuera de rango");
-
-  digitalWrite(GREEN, distance < FAR);
-  digitalWrite(YELLOW, distance < MEDIUM);
-  digitalWrite(RED, distance < NEAR);
-
-  if (!parked && distance < NEAR) {
-    parkedFeed.publish("Aparcado");
-    parked = true;
-  }
-
-  if (parked && distance > FAR) {
-    parkedFeed.publish("Desaparcando");
-    parked = false;
+    humidityFeed.publish(humidity, 2);
+    temperatureFeed.publish(temperature, 2);
   }
 
 
