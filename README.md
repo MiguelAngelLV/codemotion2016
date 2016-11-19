@@ -37,6 +37,11 @@ Si tu respuesta a las preguntas anteriores es afirmativa no deberías perderte e
 
 [Más información][5].
 
+## Ejercicios
+
+### Ejercicio 02 - semáforo
+
+![](fritzing/02-semaforo.png)
 
 ## Referencias
 
