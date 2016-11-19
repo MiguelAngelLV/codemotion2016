@@ -67,10 +67,19 @@ Si tu respuesta a las preguntas anteriores es afirmativa no deberías perderte e
 
 ![](fritzing/04-humedad.png)
 
-## Referencias
+## Ejercicio 05 - Adafruit IO
+
+![](_resources/adafruit-io.png)
+
+### Referencias
 
 * [Adafruit IO][io-adafruit]
 * [Adafruit MQTT library][adafruit-mqtt]
+
+## Ejercicio 08 - «Smart Choza Coche» y Bot de Telegram
+
+### Referencias
+
 * [Universal Telegram Bot Library][bot-telegram]
 
 [1]: https://2016.codemotion.es/agenda.html#5716304078045184/84674010
