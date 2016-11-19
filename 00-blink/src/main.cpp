@@ -7,12 +7,12 @@
 #include <Arduino.h>
 
 void setup() {
-  pinMode(BUILTIN_LED, OUTPUT);  // initialize onboard LED as output
+  pinMode(D5, OUTPUT);  // initialize onboard LED as output
 }
 
 void loop() {
-  digitalWrite(BUILTIN_LED, HIGH);  // turn on LED with voltage HIGH
-  delay(1000);                      // wait one second
-  digitalWrite(BUILTIN_LED, LOW);   // turn off LED with voltage LOW
-  delay(1000);                      // wait one second
+  digitalWrite(D5, HIGH);  // turn on LED with voltage HIGH
+  delay(200);                      // wait one second
+  digitalWrite(D5, LOW);   // turn off LED with voltage LOW
+  delay(200);                      // wait one second
 }

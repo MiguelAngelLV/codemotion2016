@@ -1,19 +1,11 @@
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
 #include <UniversalTelegramBot.h>
-#include "Adafruit_MQTT.h"
-#include "Adafruit_MQTT_Client.h"
 
 //Datos conexión WiFi
 #define WLAN_SSID       "Codemotion_2016"
 #define WLAN_PASS       "codemotion2016"
 
-//Datos conexión con Adafruit IO
-#define AIO_SERVER      "io.adafruit.com"
-#define AIO_SERVERPORT  1883
-#define AIO_USERNAME    ""
-#define AIO_KEY         ""
-#define AIO_FEED        AIO_USERNAME "/feeds/"
 
 //GPIO sensor de distancia
 #define TRIGGER D1
@@ -32,30 +24,23 @@
 //Conexión wifi
 WiFiClientSecure client;
 
-//Conexión a Adafruit
-Adafruit_MQTT_Client mqtt(&client, AIO_SERVER, AIO_SERVERPORT, AIO_USERNAME, AIO_USERNAME, AIO_KEY);
-
-//Feed para publicar información
-Adafruit_MQTT_Publish parkedFeed = Adafruit_MQTT_Publish(&mqtt, AIO_FEED "parked");
-
-//Feed para leer información
-Adafruit_MQTT_Subscribe enabledFeed = Adafruit_MQTT_Subscribe(&mqtt, AIO_FEED "enabled");
-
 
 //Telegram
-#define CHATID "114855436"
-#define TOKEN "294422919:AAFI41tX9tJPOj21htLv_kTov1Wxombw5UA"
-UniversalTelegramBot telegram(TOKEN, client);
+#define CHATID ""
+#define TOKEN ""
+String KEYBOARD = "[[\"/disable\", \"/enable\"],[\"/status\"]]";
 
+
+UniversalTelegramBot telegram(TOKEN, client);
 
 bool enabled;
 bool parked;
 
 void connectWiFi();
-void connectAdafruit();
 int time2cm(int time);
+void processMessages(int updates);
+void sendMessage(String message);
 
-//----------------------------------------------
 
 void setup() {
   //El trigger lanzará el pulso,
@@ -87,16 +72,12 @@ void setup() {
 
   // Conectamos la WiFi y con Adafruit
   connectWiFi();
-//  connectAdafruit();
-
-  //Nos sucribimos al topic: enabled
-//  mqtt.subscribe(&enabledFeed);
 
   //Encendemos el led que lleva la placa integrado
   pinMode(BUILTIN_LED, OUTPUT);
   digitalWrite(BUILTIN_LED, enabled);
 
-  telegram.sendMessage(CHATID, "Iniciando Smart Choza del Coche", "");
+  sendMessage("Iniciando Smart Choza del Coche");
 
 
 }
@@ -104,19 +85,19 @@ void setup() {
 //----------------------------------------------
 
 void loop() {
-/*  Adafruit_MQTT_Subscribe * subscription = mqtt.readSubscription(200);
 
-  if (subscription == &enabledFeed) {
-    if (strcmp((char *)enabledFeed.lastread, "ON") == 0)
-        enabled = true;
-    else
-        enabled = false;
 
-    digitalWrite(BUILTIN_LED, enabled);
+  int updates = telegram.getUpdates(telegram.last_message_recived + 1);
+  while(updates) {
+    Serial.println("Nuevo mensaje");
+    processMessages(updates);
+    updates = telegram.getUpdates(telegram.last_message_recived + 1);
   }
 
+
+
   if (!enabled)
-    return;*/
+    return;
 
   //Esperamos 4 microsegundos para asegurarnos de que no hay
   //ondas residuales que hagan interferencias
@@ -147,17 +128,23 @@ void loop() {
   digitalWrite(RED, distance < NEAR);
 
   if (!parked && distance < NEAR) {
-  //  parkedFeed.publish("Aparcado");
-    telegram.sendMessage(CHATID, "Aparcando", "");
+    sendMessage("Aparcando");
     parked = true;
   }
 
   if (parked && distance > FAR) {
-    telegram.sendMessage(CHATID, "Desaparcando", "");
-    //parkedFeed.publish("Desaparcando");
+    sendMessage("Desaparcando");
     parked = false;
   }
 }
+
+
+//---------------------------------------------
+
+void sendMessage(String message) {
+  telegram.sendMessageWithReplyKeyboard(CHATID, "Iniciando Smart Choza del Coche", "", KEYBOARD, true);
+}
+
 
 //----------------------------------------------
 
@@ -175,17 +162,13 @@ void connectWiFi() {
 
 //----------------------------------------------
 
-void connectAdafruit() {
-  if (mqtt.connected())
-    return;
 
-  Serial.print("Connecting to MQTT... ");
-  while (mqtt.connect() != 0) {
-       Serial.println("Error. Retrying MQTT connection in 5 seconds...");
-       mqtt.disconnect();
-       delay(5000);
+void processMessages(int updates) {
+  for (int i = 0; i < updates; i++) {
+      String text = telegram.messages[i].text;
   }
 }
+
 
 //----------------------------------------------
 

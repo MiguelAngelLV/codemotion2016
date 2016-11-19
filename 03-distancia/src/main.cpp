@@ -1,7 +1,7 @@
 #include <Arduino.h>
 
 //GPIO sensor de distancia
-#define TRIGGER D1
+#define TRIGGER D3
 #define ECHO    D2
 
 int time2cm(int time);
