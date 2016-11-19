@@ -88,7 +88,7 @@ Si tu respuesta a las preguntas anteriores es afirmativa no deberías perderte e
 [4]: http://twitter.com/josejuansanchez
 [5]: https://www.wemos.cc/product/d1.html
 [6]: https://www.wemos.cc/downloads/CH341SER_win.zip
-[7]: https://www.wemos.cc/downloads/CH34x_Install_mac.zip
+[7]: https://github.com/adrianmihalko/ch340g-ch34g-ch34x-mac-os-x-driver
 [8]: https://www.wemos.cc/downloads/CH341SER_MAC_old.ZIP
 [9]: http://kig.re/2014/12/31/how-to-use-arduino-nano-mini-pro-with-CH340G-on-mac-osx-yosemite.html
 
