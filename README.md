@@ -47,6 +47,10 @@ Si tu respuesta a las preguntas anteriores es afirmativa no deberías perderte e
 
 ![](fritzing/03-distancia.png)
 
+### Ejercicio 04 - humedad
+
+![](fritzing/04-humedad.png)
+
 ## Referencias
 
 * [Adafruit IO][io-adafruit]
