@@ -47,6 +47,8 @@ void connectWiFi();
 void connectAdafruit();
 int time2cm(int time);
 
+//----------------------------------------------
+
 void setup() {
   //El trigger lanzará el pulso,
   //lo configuramos como salida
@@ -71,10 +73,11 @@ void setup() {
   enabled = true;
   parked  = false;
 
+  //Iniciamos el Serial
   Serial.begin(9600);
   delay(200);
 
-  // Conectamos la WiFI y con Adafruit
+  // Conectamos la WiFi y con Adafruit
   connectWiFi();
   connectAdafruit();
 
@@ -85,6 +88,8 @@ void setup() {
   pinMode(BUILTIN_LED, OUTPUT);
   digitalWrite(BUILTIN_LED, enabled);
 }
+
+//----------------------------------------------
 
 void loop() {
   Adafruit_MQTT_Subscribe * subscription = mqtt.readSubscription(200);
@@ -140,6 +145,8 @@ void loop() {
   }
 }
 
+//----------------------------------------------
+
 void connectWiFi() {
   WiFi.begin(WLAN_SSID, WLAN_PASS);
   while (WiFi.status() != WL_CONNECTED) {
@@ -152,6 +159,8 @@ void connectWiFi() {
   Serial.println(WiFi.localIP());
 }
 
+//----------------------------------------------
+
 void connectAdafruit() {
   if (mqtt.connected())
     return;
@@ -163,6 +172,8 @@ void connectAdafruit() {
        delay(5000);
   }
 }
+
+//----------------------------------------------
 
 int time2cm(int time) {
   return (int) round(time * 0.0171232877);
