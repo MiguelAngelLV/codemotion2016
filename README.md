@@ -35,6 +35,12 @@ Si tu respuesta a las preguntas anteriores es afirmativa no deberías perderte e
   * [Más información][9]
 * Linux: Not need setup driver.
 
+## Referencias
+
+* [Adafruit IO][io-adafruit]
+* [Adafruit MQTT library][adafruit-mqtt]
+* [Universal Telegram Bot Library][bot-telegram]
+
 [1]: https://2016.codemotion.es/agenda.html#5716304078045184/84674010
 [2]: http://2016.codemotion.es
 [3]: http://twitter.com/MiguelAngel_LV
@@ -44,4 +50,8 @@ Si tu respuesta a las preguntas anteriores es afirmativa no deberías perderte e
 [7]: https://www.wemos.cc/downloads/CH34x_Install_mac.zip
 [8]: https://www.wemos.cc/downloads/CH341SER_MAC_old.ZIP
 [9]: http://kig.re/2014/12/31/how-to-use-arduino-nano-mini-pro-with-CH340G-on-mac-osx-yosemite.html
+
 [platformio-ide]: http://platformio.org/platformio-ide
+[io-adafruit]: https://io.adafruit.com
+[adafruit-mqtt]: https://github.com/adafruit/Adafruit_MQTT_Library
+[bot-telegram]: https://github.com/witnessmenow/Universal-Arduino-Telegram-Bot
