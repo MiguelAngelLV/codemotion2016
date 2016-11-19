@@ -16,6 +16,10 @@ Ejemplos usados en el workshop **[«Experimentando con chismes y cacharros»][1]
 
 Si tu respuesta a las preguntas anteriores es afirmativa no deberías perderte este workshop, este es tu sitio.
 
+## PlatformIO
+
+* [Descargar Platform IO IDE][platformio-ide]
+
 ## Wemos D1
 
 ![](_resources/wemos_d1.jpg)
@@ -40,3 +44,4 @@ Si tu respuesta a las preguntas anteriores es afirmativa no deberías perderte e
 [7]: https://www.wemos.cc/downloads/CH34x_Install_mac.zip
 [8]: https://www.wemos.cc/downloads/CH341SER_MAC_old.ZIP
 [9]: http://kig.re/2014/12/31/how-to-use-arduino-nano-mini-pro-with-CH340G-on-mac-osx-yosemite.html
+[platformio-ide]: http://platformio.org/platformio-ide
