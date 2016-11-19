@@ -43,6 +43,10 @@ Si tu respuesta a las preguntas anteriores es afirmativa no deberías perderte e
 
 ![](fritzing/02-semaforo.png)
 
+### Ejercicio 03 - distancia
+
+![](fritzing/03-distancia.png)
+
 ## Referencias
 
 * [Adafruit IO][io-adafruit]
