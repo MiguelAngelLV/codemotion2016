@@ -16,7 +16,14 @@ Ejemplos usados en el workshop **[«Experimentando con chismes y cacharros»][1]
 
 Si tu respuesta a las preguntas anteriores es afirmativa no deberías perderte este workshop, este es tu sitio.
 
+## Driver para el chip CH340
+
+* Windows: [ch341ser_win.zip][5].
+* Mac OS X: [CH34x_Install_V1.3.zip][6].
+
 [1]: https://2016.codemotion.es/agenda.html#5716304078045184/84674010
 [2]: http://2016.codemotion.es
 [3]: http://twitter.com/MiguelAngel_LV
 [4]: http://twitter.com/josejuansanchez
+[5]: http://www.prometec.net/wp-content/uploads/2016/03/ch341ser_win.zip
+[6]: http://blog.sengotta.net/wp-content/uploads/2015/11/CH34x_Install_V1.3.zip
