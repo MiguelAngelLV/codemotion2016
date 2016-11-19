@@ -16,17 +16,13 @@ Ejemplos usados en el workshop **[«Experimentando con chismes y cacharros»][1]
 
 Si tu respuesta a las preguntas anteriores es afirmativa no deberías perderte este workshop, este es tu sitio.
 
-## PlatformIO
+## Requisitos para el workshop
+
+### 1. Instalar PlatformIO IDE
 
 * [Descargar Platform IO IDE][platformio-ide]
 
-## Wemos D1
-
-![](_resources/wemos_d1.jpg)
-
-[Más información][5].
-
-## Driver para el chip CH340 / USB to UART
+### 2. Instalar driver para el chip CH340 / USB to UART
 
 * Windows: [CH341SER_win.zip][6]
 * Mac OS X:
@@ -34,6 +30,13 @@ Si tu respuesta a las preguntas anteriores es afirmativa no deberías perderte e
   * [Versiones más antiguas][8]
   * [Más información][9]
 * Linux: Not need setup driver.
+
+## Wemos D1
+
+![](_resources/wemos_d1.jpg)
+
+[Más información][5].
+
 
 ## Referencias
 
